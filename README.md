@@ -51,7 +51,7 @@ public class Categoria implements Serializable {
 -Nas classes de repository/services, quando for buscar por Id ao invés de utilizar o findOne(id). Usar o seguinte método.
 
 ATUALIZAÇÃO
-Se você criou o projeto usando Spring Boot versão 2.x.x:
+projeto usando Spring Boot versão 2.x.x:
 
 Em CategoriaService, onde na aula é mostrado:
 public Categoria find(Integer id) {
@@ -82,3 +82,18 @@ return obj.orElse(null);
 	return ResponseEntity.ok().body(obj);
 
 -Dessa forma, já ira retornar o status 200 e o corpo do objeto.
+
+
+-ATUALIZAÇÃO
+
+projeto usando Spring Boot versão 2.x.x:
+
+
+categoriaRepository.save(Arrays.asList(cat1, cat2));
+Troque pelo seguinte código:
+categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
+
+-Para rodar o comando, assim que executar a aplicação foi necessário alterar a classe aplicattion. Deve implementar CommandLineRunner, e sobreescrever o método run.
+-Cria-se os objetos e saveAll através de uma instancia de um repository.
+
+-Dica: PARA SE CRIAR UMA LISTA - repo.saveAll(Arrays.asList(cat1,cat2));
