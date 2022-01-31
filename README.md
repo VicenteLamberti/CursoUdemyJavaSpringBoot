@@ -46,3 +46,39 @@ public class Categoria implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	
+	
+-Nas classes de repository/services, quando for buscar por Id ao invés de utilizar o findOne(id). Usar o seguinte método.
+
+ATUALIZAÇÃO
+Se você criou o projeto usando Spring Boot versão 2.x.x:
+
+Em CategoriaService, onde na aula é mostrado:
+public Categoria find(Integer id) {
+Categoria obj = repo.findOne(id);
+return obj;
+}
+Troque pelo seguinte código (import java.util.Optional):
+public Categoria find(Integer id) {
+Optional<Categoria> obj = repo.findById(id);
+return obj.orElse(null);
+}
+	
+-Classes de repository, devem ser separados em um pacote separado, exemplo: repositories.
+-Essas classes devem ser anotadas de Repository
+-Porém os repositories não são classes, e sim interfaces, que devem extender JpaRepository<ClasseDomain,TipoPrimitivoDaChaveId>
+	
+-Para criar classes que são do tipo Services (que utilizarão os repositories), devem ser anotadas de Service.
+-É necessário criar um atributo/dependência private do repository (CategoriaRepository) e deve ser anotado com Autowired, para que seja instanciado por injeção de depêndencia.
+	
+-No resource, é necessário fazer alterações, para que agora seja possível buscar um id. Primeiramente o método deve receber um Integer id
+-O método deve possuir na anotacão RequestMapping, um novo parâmetro (value="/{apelidoGeralmenteid}",method=RequestMethod.GET)
+-E no parâmetro do método, para associar o id da requisição, deve ser colocado uma anotação find(PathVariable Integer id)
+-Para ficar mais técnico, ao invés do tipo do retorno ser o próprio objeto, deve-se retornar um ResponseEntity<?>
+-Para se utilizar o Service que irá buscar os dados dos repositories, é necessário criar um atributo private CategoriaService service, com a anotação Autowired
+
+-O retorno pode ser assim:
+	Categoria obj = service.buscar(id);
+	return ResponseEntity.ok().body(obj);
+
+-Dessa forma, já ira retornar o status 200 e o corpo do objeto.
