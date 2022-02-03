@@ -97,3 +97,30 @@ categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
 -Cria-se os objetos e saveAll através de uma instancia de um repository.
 
 -Dica: PARA SE CRIAR UMA LISTA - repo.saveAll(Arrays.asList(cat1,cat2));
+
+
+-Criação da entidade Produto
+-Anotar com Entity
+-Criar o atributo de Categorias 
+	@Entity
+public class Categoria implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	private String nome;
+	private List<Produto>produtos = new ArrayList<>();
+	
+	
+	public Categoria() {
+		
+	}
+	public Categoria(Integer id, String nome) {
+
+		this.id = id;
+		this.nome = nome;
+	}
+
+As listas não devem estar no construtore.
