@@ -14,6 +14,8 @@ import javax.persistence.ManyToMany;
 
 import org.hibernate.annotations.ManyToAny;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Produto {
 
@@ -24,6 +26,7 @@ public class Produto {
 	private String nome;
 	private Double preco;
 	
+	@JsonBackReference
 	@ManyToMany
 	@JoinTable(name="PRODUTO_CATEGORIA",
 	joinColumns = @JoinColumn(name="produto_id"),

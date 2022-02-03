@@ -2,11 +2,13 @@ package com.vicenteleonardo.CursoUdemySpringBoot.services;
 
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.vicenteleonardo.CursoUdemySpringBoot.domain.Categoria;
 import com.vicenteleonardo.CursoUdemySpringBoot.repositories.CategoriaRepository;
+import com.vicenteleonardo.CursoUdemySpringBoot.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
@@ -21,6 +23,6 @@ public class CategoriaService {
 		
 		
 		Optional<Categoria> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName(), null));
 	}
 }
