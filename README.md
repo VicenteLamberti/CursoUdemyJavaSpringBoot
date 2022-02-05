@@ -127,6 +127,7 @@ As listas não devem estar no construtor e devem ser instanciadas no próprio at
 
 
 -@JsonManagedReference é preciso ter essa anotação dentro da entidade Categoria, porque senão categoria chama produto, produto chama categoria, e vira um ciclo
+-@JsonBackReference é preciso ter essa anotação quando o relacionamento é bidirecional, uma classe vai ter o @JsonManagedReference e outra @JsonBackReference
 
 -Uma classe com a anotaçãoo @ControllerAdvice - para capturar excessoes na controller, sem ficar usando try catch
 
