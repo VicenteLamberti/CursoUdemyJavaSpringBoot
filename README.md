@@ -130,4 +130,15 @@ As listas não devem estar no construtor e devem ser instanciadas no próprio at
 
 -Uma classe com a anotaçãoo @ControllerAdvice - para capturar excessoes na controller, sem ficar usando try catch
 
--Annotations de OneToMany, devem ter também o mappedBy="nomeDoAtributoNaOutraClasse"
+-Annotations de OneToMany (coleções) , devem ter também o mappedBy="nomeDoAtributoNaOutraClasse"
+
+
+-Ao criar enuns, colocar a ordem na frente do atributo PESSOAFISICA(1,"PF"). Então criar construtor e get 
+
+-Ao criar os atributos, em vez de ser um ENUM, vai ser um int, mas no construtor vai continuar recebendo um ENUM , ai é só usar o getCod();
+
+-@ElementCollection
+	@CollectionTable(name = "TELEFONE")
+	private Set<String> telefones = new HashSet<>();
+
+Essas anotações são para o caso de ter um relacionamento, porém não foi criado classe.
