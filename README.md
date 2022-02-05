@@ -123,9 +123,11 @@ public class Categoria implements Serializable {
 		this.nome = nome;
 	}
 
-As listas não devem estar no construtor.
+As listas não devem estar no construtor e devem ser instanciadas no próprio atributo da classe;
 
 
 -@JsonManagedReference é preciso ter essa anotação dentro da entidade Categoria, porque senão categoria chama produto, produto chama categoria, e vira um ciclo
 
 -Uma classe com a anotaçãoo @ControllerAdvice - para capturar excessoes na controller, sem ficar usando try catch
+
+-Annotations de OneToMany, devem ter também o mappedBy="nomeDoAtributoNaOutraClasse"
