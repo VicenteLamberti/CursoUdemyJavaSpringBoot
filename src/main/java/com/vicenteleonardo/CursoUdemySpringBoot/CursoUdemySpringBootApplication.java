@@ -1,5 +1,6 @@
 package com.vicenteleonardo.CursoUdemySpringBoot;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +13,20 @@ import com.vicenteleonardo.CursoUdemySpringBoot.domain.Cidade;
 import com.vicenteleonardo.CursoUdemySpringBoot.domain.Cliente;
 import com.vicenteleonardo.CursoUdemySpringBoot.domain.Endereco;
 import com.vicenteleonardo.CursoUdemySpringBoot.domain.Estado;
+import com.vicenteleonardo.CursoUdemySpringBoot.domain.Pagamento;
+import com.vicenteleonardo.CursoUdemySpringBoot.domain.PagamentoComBoleto;
+import com.vicenteleonardo.CursoUdemySpringBoot.domain.PagamentoComCartao;
+import com.vicenteleonardo.CursoUdemySpringBoot.domain.Pedido;
 import com.vicenteleonardo.CursoUdemySpringBoot.domain.Produto;
+import com.vicenteleonardo.CursoUdemySpringBoot.domain.enums.EstadoPagamento;
 import com.vicenteleonardo.CursoUdemySpringBoot.domain.enums.TipoCliente;
 import com.vicenteleonardo.CursoUdemySpringBoot.repositories.CategoriaRepository;
 import com.vicenteleonardo.CursoUdemySpringBoot.repositories.CidadeRepository;
 import com.vicenteleonardo.CursoUdemySpringBoot.repositories.ClienteRepository;
 import com.vicenteleonardo.CursoUdemySpringBoot.repositories.EnderecoRepository;
 import com.vicenteleonardo.CursoUdemySpringBoot.repositories.EstadoRepository;
+import com.vicenteleonardo.CursoUdemySpringBoot.repositories.PagamentoRepository;
+import com.vicenteleonardo.CursoUdemySpringBoot.repositories.PedidoRepository;
 import com.vicenteleonardo.CursoUdemySpringBoot.repositories.ProdutoRepository;
 
 @SpringBootApplication
@@ -41,6 +49,12 @@ public class CursoUdemySpringBootApplication implements CommandLineRunner {
 	
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	
+	@Autowired
+	private  PedidoRepository pedidoRepository;
+	
+	@Autowired
+	private PagamentoRepository pagamentoRepository;
 	
 	
 	public static void main(String[] args) {
@@ -99,6 +113,25 @@ public class CursoUdemySpringBootApplication implements CommandLineRunner {
 		clienteRepository.save(cli1);
 		
 		enderecoRepository.saveAll(Arrays.asList(e1,e2));
+		
+//		-------------------------------------
+		
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyy HH:mm");
+		Pedido ped1 = new Pedido(null, simpleDateFormat.parse("30/09/2017 10:30"), cli1, e1);
+		Pedido ped2 = new Pedido(null, simpleDateFormat.parse("10/10/2017 10:30"), cli1, e2);
+		
+		Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
+		ped1.setPagamento(pagto1);
+		
+		Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, simpleDateFormat.parse("20/10/2017 00:00"),null);
+		ped2.setPagamento(pagto2);
+		
+		cli1.getPedidos().addAll(Arrays.asList(ped1,ped2));
+		
+		
+		pedidoRepository.saveAll(Arrays.asList(ped1,ped2));
+		
+		pagamentoRepository.saveAll(Arrays.asList(pagto1,pagto2));
 		
 	}
 

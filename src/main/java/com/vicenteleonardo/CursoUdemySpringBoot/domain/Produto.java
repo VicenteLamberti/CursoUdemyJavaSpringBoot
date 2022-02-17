@@ -1,5 +1,6 @@
 package com.vicenteleonardo.CursoUdemySpringBoot.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -12,12 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import org.hibernate.annotations.ManyToAny;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-public class Produto {
+public class Produto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
