@@ -167,3 +167,11 @@ public class Pagamento implements Serializable{
 
 
 Para colocar herança nas entidades anotar com @Inheritance
+
+
+
+Para colocar uma chave primaria composta preciso criar a classe, e colocar os atributos referentes as chaves, colocar get e sets e hashcode equals.
+
+Anotar a classe com @Embeddable , e o atributo usar @EmbeddedId
+
+no construtor ao invés de setar o itemPedidoPK, eu seto as duas classes dentro do id
