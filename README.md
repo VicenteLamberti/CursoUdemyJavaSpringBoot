@@ -143,3 +143,27 @@ As listas não devem estar no construtor e devem ser instanciadas no próprio at
 	private Set<String> telefones = new HashSet<>();
 
 Essas anotações são para o caso de ter um relacionamento, porém não foi criado classe.
+
+
+
+
+
+-Em relacionamentos OneToOne é interessante os id serem os mesmo. Para isso não anotar com GenerationType.Identity.
+
+Anotar com @MapsId
+
+public class Pagamento implements Serializable{
+
+
+	private static final long serialVersionUID = 1L;
+	
+	private Integer id;
+	private EstadoPagamento estado;
+	
+	@OneToOne
+	@JoinColumn(name="pedido_id")
+	@MapsId
+	private Pedido pedido;
+
+
+Para colocar herança nas entidades anotar com @Inheritance
