@@ -175,3 +175,6 @@ Para colocar uma chave primaria composta preciso criar a classe, e colocar os at
 Anotar a classe com @Embeddable , e o atributo usar @EmbeddedId
 
 no construtor ao invés de setar o itemPedidoPK, eu seto as duas classes dentro do id
+
+Onde era JsonManagedReference foi tirado
+e onde era JsonBackReference foi colocado JsonIgnore
