@@ -14,7 +14,7 @@ import com.vicenteleonardo.CursoUdemySpringBoot.services.exceptions.ObjectNotFou
 public class CategoriaService {
 
 	@Autowired
-	private CategoriaRepository repo;
+	private CategoriaRepository categoriaRepository;
 	
 	public Categoria buscar(Integer id) {
 //		A partir do JAVA 8, essa forma ficou obsoleto, o Optional já faz o tratamento em casos de objetos null;
@@ -22,7 +22,13 @@ public class CategoriaService {
 //		return obj;
 		
 		
-		Optional<Categoria> obj = repo.findById(id);
+		Optional<Categoria> obj = categoriaRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName(), null));
+	}
+	
+	
+	public Categoria insert(Categoria categoria) {
+		categoria.setId(null);
+		return categoriaRepository.save(categoria);
 	}
 }
