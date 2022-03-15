@@ -16,7 +16,7 @@ public class CategoriaService {
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 	
-	public Categoria buscar(Integer id) {
+	public Categoria find(Integer id) {
 //		A partir do JAVA 8, essa forma ficou obsoleto, o Optional já faz o tratamento em casos de objetos null;
 //		Categoria obj = repo.findOne(id);
 //		return obj;
@@ -30,5 +30,12 @@ public class CategoriaService {
 	public Categoria insert(Categoria categoria) {
 		categoria.setId(null);
 		return categoriaRepository.save(categoria);
+	}
+	
+	public Categoria update(Categoria categoria) {
+		find(categoria.getId());
+		categoriaRepository.save(categoria);
+		return categoria;
+		
 	}
 }
