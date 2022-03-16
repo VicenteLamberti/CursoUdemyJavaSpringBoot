@@ -1,7 +1,7 @@
 package com.vicenteleonardo.CursoUdemySpringBoot.services;
 
+import java.util.List;
 import java.util.Optional;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -50,6 +50,9 @@ public class CategoriaService {
 			throw new DataIntegrityException("Não é possível excluir uma categorias que possui produtos");
 		}
 		
-		
+	}
+	
+	public List<Categoria>findAll(){
+		return categoriaRepository.findAll();
 	}
 }

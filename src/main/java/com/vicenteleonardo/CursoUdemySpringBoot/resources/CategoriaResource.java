@@ -1,10 +1,13 @@
 package com.vicenteleonardo.CursoUdemySpringBoot.resources;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.vicenteleonardo.CursoUdemySpringBoot.domain.Categoria;
+import com.vicenteleonardo.CursoUdemySpringBoot.dto.CategoriaDTO;
 import com.vicenteleonardo.CursoUdemySpringBoot.services.CategoriaService;
 
 @RestController
@@ -23,6 +27,14 @@ public class CategoriaResource {
 	
 	@Autowired
 	private CategoriaService categoriaService;
+	
+	@GetMapping
+	public ResponseEntity<List<CategoriaDTO>> findAll(){
+		List<Categoria> listCategoria = categoriaService.findAll();
+		List<CategoriaDTO> listCategoriaDto = listCategoria.stream().map( categoria -> new CategoriaDTO(categoria)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listCategoriaDto);
+		
+	}
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
