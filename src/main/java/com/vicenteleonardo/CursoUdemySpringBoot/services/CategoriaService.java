@@ -9,10 +9,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.vicenteleonardo.CursoUdemySpringBoot.domain.Categoria;
+import com.vicenteleonardo.CursoUdemySpringBoot.dto.CategoriaDTO;
 import com.vicenteleonardo.CursoUdemySpringBoot.repositories.CategoriaRepository;
 import com.vicenteleonardo.CursoUdemySpringBoot.services.exceptions.DataIntegrityException;
 import com.vicenteleonardo.CursoUdemySpringBoot.services.exceptions.ObjectNotFoundException;
@@ -65,5 +64,9 @@ public class CategoriaService {
 	public Page<Categoria>findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage,Direction.valueOf(direction),orderBy);
 		return categoriaRepository.findAll(pageRequest);
+	}
+	
+	public Categoria fromDTO (CategoriaDTO categoriaDTO) {
+		return new Categoria(categoriaDTO.getId(),categoriaDTO.getNome());
 	}
 }
