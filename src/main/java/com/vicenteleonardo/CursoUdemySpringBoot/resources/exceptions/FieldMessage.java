@@ -6,20 +6,20 @@ public class FieldMessage implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private String field;
+	private String fieldName;
 	private String message;
 	
-	public FieldMessage(String field, String message) {
-		this.field = field;
+	public FieldMessage(String fieldName, String message) {
+		this.fieldName = fieldName;
 		this.message = message;
 	}
 
-	public String getField() {
-		return field;
+	public String getFieldName() {
+		return fieldName;
 	}
 
-	public void setField(String field) {
-		this.field = field;
+	public void setFieldName(String fieldName) {
+		this.fieldName = fieldName;
 	}
 
 	public String getMessage() {
