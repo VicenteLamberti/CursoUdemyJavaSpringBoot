@@ -22,7 +22,7 @@ public class ItemPedido implements Serializable{
 	
 	private Integer quantidade;
 	
-	private Double Preco;
+	private Double preco;
 	
 	public ItemPedido() {
 		// TODO Auto-generated constructor stub
@@ -33,7 +33,11 @@ public class ItemPedido implements Serializable{
 		this.id.setProduto(produto);
 		this.desconto = desconto;
 		this.quantidade = quantidade;
-		Preco = preco;
+		this.preco = preco;
+	}
+	
+	public double getSubTotal() {
+		return (this.preco - this.desconto) * quantidade;
 	}
 	
 	@JsonIgnore
@@ -71,11 +75,11 @@ public class ItemPedido implements Serializable{
 	}
 
 	public Double getPreco() {
-		return Preco;
+		return preco;
 	}
 
 	public void setPreco(Double preco) {
-		Preco = preco;
+		preco = preco;
 	}
 
 	@Override
