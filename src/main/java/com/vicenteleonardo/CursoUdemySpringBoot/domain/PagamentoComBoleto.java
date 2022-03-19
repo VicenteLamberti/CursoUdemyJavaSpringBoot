@@ -5,9 +5,11 @@ import java.util.Date;
 import javax.persistence.Entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.vicenteleonardo.CursoUdemySpringBoot.domain.enums.EstadoPagamento;
 
 @Entity
+@JsonTypeName("pagamentoComBoleto") // Utilizado porque na classe mãe pagamento eu disse que ia ter um campo a mais que ia ser referenciado por esse nome
 public class PagamentoComBoleto extends Pagamento {
 	private static final long serialVersionUID = 1L;
 	@JsonFormat(pattern = "dd/MM/yyyy")

@@ -2,9 +2,11 @@ package com.vicenteleonardo.CursoUdemySpringBoot.domain;
 
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.vicenteleonardo.CursoUdemySpringBoot.domain.enums.EstadoPagamento;
 
 @Entity  
+@JsonTypeName("pagamentoComCartao") // Utilizado porque na classe mãe pagamento eu disse que ia ter um campo a mais que ia ser referenciado por esse nome
 public class PagamentoComCartao extends Pagamento {
 	private static final long serialVersionUID = 1L;
 

@@ -40,7 +40,7 @@ public class CategoriaResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<Categoria> insert(@Valid @RequestBody CategoriaDTO categoriaDTO) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO categoriaDTO) {
 		Categoria categoria = categoriaService.fromDTO(categoriaDTO);
 		categoria = categoriaService.insert(categoria);
 
