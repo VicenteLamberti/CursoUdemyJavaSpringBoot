@@ -2,11 +2,15 @@ package com.vicenteleonardo.CursoUdemySpringBoot.dto;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.websocket.ClientEndpoint;
 
 import org.hibernate.validator.constraints.Length;
 
 import com.vicenteleonardo.CursoUdemySpringBoot.domain.Cliente;
+import com.vicenteleonardo.CursoUdemySpringBoot.services.validation.ClienteUpdate;
 
+//Anotação personalizada coloca na classe  não no atributo
+@ClienteUpdate
 public class ClienteDTO {
 
 	
