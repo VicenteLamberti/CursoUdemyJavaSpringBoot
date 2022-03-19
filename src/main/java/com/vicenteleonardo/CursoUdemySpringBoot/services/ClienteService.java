@@ -3,6 +3,8 @@ package com.vicenteleonardo.CursoUdemySpringBoot.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -48,6 +50,7 @@ public class ClienteService {
 		
 	}
 	
+	@Transactional
 	public Cliente insert(Cliente cliente) {
 		cliente.setId(null);
 		cliente = repo.save(cliente);
@@ -61,7 +64,7 @@ public class ClienteService {
 			repo.deleteById(id);
 		}
 		catch (DataIntegrityViolationException e) {
-			throw new DataIntegrityException("Não é possível excluir uma clientes que possui produtos");
+			throw new DataIntegrityException("Não é possível excluir um clientes que possui produtos");
 		}
 		
 	}
@@ -82,7 +85,7 @@ public class ClienteService {
 	
 	public Cliente fromDTO( ClienteNewDTO clienteNewDTO) {
 		Cliente cliente =  new Cliente(null,clienteNewDTO.getNome(),clienteNewDTO.getEmail(),clienteNewDTO.getCpfOuCnpj(),TipoCliente.toEnum(clienteNewDTO.getTipo()));
-		Cidade cidade = cidadeRepository.getById(clienteNewDTO.getCidadeId());
+		Cidade cidade = new Cidade(clienteNewDTO.getCidadeId(),null,null);
 		Endereco endereco = 
 				new Endereco(null,  clienteNewDTO.getLogradouro(), clienteNewDTO.getNumero(), clienteNewDTO.getComplemento(), 
 						clienteNewDTO.getBairro(), clienteNewDTO.getCep(), cliente, cidade);
