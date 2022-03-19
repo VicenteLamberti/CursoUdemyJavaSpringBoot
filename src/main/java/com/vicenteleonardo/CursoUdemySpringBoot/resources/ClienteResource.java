@@ -22,9 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.vicenteleonardo.CursoUdemySpringBoot.domain.Cliente;
-import com.vicenteleonardo.CursoUdemySpringBoot.domain.Cliente;
 import com.vicenteleonardo.CursoUdemySpringBoot.dto.ClienteDTO;
-import com.vicenteleonardo.CursoUdemySpringBoot.dto.ClienteDTO;
+import com.vicenteleonardo.CursoUdemySpringBoot.dto.ClienteNewDTO;
 import com.vicenteleonardo.CursoUdemySpringBoot.services.ClienteService;
 
 @RestController
@@ -42,15 +41,15 @@ public class ClienteResource {
 	
 	
 
-//	@PostMapping
-//	public ResponseEntity<Cliente> insert(@Valid @RequestBody ClienteDTO clienteDTO) {
-//		Cliente cliente = clienteService.fromDTO(clienteDTO);
-//		cliente = clienteService.insert(cliente);
-//
-//		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId())
-//				.toUri();
-//		return ResponseEntity.created(uri).build();
-//	}
+	@PostMapping
+	public ResponseEntity<Cliente> insert(@Valid @RequestBody ClienteNewDTO clienteNewDTO) {
+		Cliente cliente = clienteService.fromDTO(clienteNewDTO);
+		cliente = clienteService.insert(cliente);
+
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId())
+				.toUri();
+		return ResponseEntity.created(uri).build();
+	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Cliente> update(@Valid @RequestBody ClienteDTO clienteDTO, @PathVariable Integer id) {
