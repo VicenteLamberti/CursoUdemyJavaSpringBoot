@@ -32,7 +32,7 @@ public class ClienteService {
 		Cliente clienteParaAtualizar = find(cliente.getId());
 		updateData(clienteParaAtualizar, cliente);
 		repo.save(clienteParaAtualizar);
-		return cliente;
+		return clienteParaAtualizar;
 		
 	}
 

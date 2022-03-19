@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.vicenteleonardo.CursoUdemySpringBoot.domain.Categoria;
+import com.vicenteleonardo.CursoUdemySpringBoot.domain.Cliente;
 import com.vicenteleonardo.CursoUdemySpringBoot.dto.CategoriaDTO;
 import com.vicenteleonardo.CursoUdemySpringBoot.repositories.CategoriaRepository;
 import com.vicenteleonardo.CursoUdemySpringBoot.services.exceptions.DataIntegrityException;
@@ -38,10 +39,23 @@ public class CategoriaService {
 		return categoriaRepository.save(categoria);
 	}
 	
+//	public Categoria update(Categoria categoria) {
+//		find(categoria.getId());
+//		categoriaRepository.save(categoria);
+//		return categoria;
+//		
+//	}
+	
 	public Categoria update(Categoria categoria) {
-		find(categoria.getId());
-		categoriaRepository.save(categoria);
-		return categoria;
+		Categoria categoriaParaAtualizar = find(categoria.getId());
+		updateData(categoriaParaAtualizar, categoria);
+		categoriaRepository.save(categoriaParaAtualizar);
+		return categoriaParaAtualizar;
+		
+	}
+	
+	private void updateData(Categoria novaCategoria, Categoria categoria) {
+		novaCategoria.setNome(categoria.getNome());
 		
 	}
 
