@@ -74,7 +74,7 @@ public class CategoriaResource {
 	}
 
 	@GetMapping("/page")
-	public ResponseEntity<Page<Categoria>> findPage(
+	public ResponseEntity<Page<CategoriaDTO>> findPage(
 			@RequestParam(value="page",defaultValue = "0") Integer page,
 			@RequestParam(value="linesPerPage",defaultValue = "24") Integer linesPerPage,
 			@RequestParam(value="orderBy",defaultValue = "nome") String orderBy,
@@ -82,7 +82,7 @@ public class CategoriaResource {
 		
 		Page<Categoria> listPageCategoria = categoriaService.findPage(page, linesPerPage, orderBy, direction);
 		Page<CategoriaDTO> listPageCategoriaDTO = listPageCategoria.map(categoria -> new CategoriaDTO(categoria));
-		return ResponseEntity.ok().body(listPageCategoria);
+		return ResponseEntity.ok().body(listPageCategoriaDTO);
 		
 	}
 
