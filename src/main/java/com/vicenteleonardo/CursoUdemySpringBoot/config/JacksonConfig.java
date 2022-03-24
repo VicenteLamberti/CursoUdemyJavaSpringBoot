@@ -8,6 +8,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vicenteleonardo.CursoUdemySpringBoot.domain.PagamentoComBoleto;
 import com.vicenteleonardo.CursoUdemySpringBoot.domain.PagamentoComCartao;
 
+/**
+ * Classe de configuração para adicionar um campo de uma classe abstrata
+ * @author Vicente
+ *
+ */
 @Configuration
 public class JacksonConfig {
 // https://stackoverflow.com/questions/41452598/overcome-can-not-construct-instance-ofinterfaceclass-without-hinting-the-pare
