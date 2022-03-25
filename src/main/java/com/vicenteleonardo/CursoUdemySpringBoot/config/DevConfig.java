@@ -3,6 +3,7 @@ package com.vicenteleonardo.CursoUdemySpringBoot.config;
 import java.text.ParseException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -35,7 +36,7 @@ public class DevConfig {
 	@Bean
 	public boolean instatiateDatabase() throws ParseException {
 		if("create".equals(strategy) == false) {
-			return false;
+			return false; 
 		}
 		dbDbService.instatiateTestDatabase();
 		return true;
