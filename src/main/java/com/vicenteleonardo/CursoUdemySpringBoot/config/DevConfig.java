@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.vicenteleonardo.CursoUdemySpringBoot.services.DBService;
+import com.vicenteleonardo.CursoUdemySpringBoot.services.IEmailService;
+import com.vicenteleonardo.CursoUdemySpringBoot.services.MockEmailService;
+import com.vicenteleonardo.CursoUdemySpringBoot.services.SmtpEmailService;
 
 /**
  * Classe criada para o perfil de dev
@@ -40,5 +43,10 @@ public class DevConfig {
 		}
 		dbDbService.instatiateTestDatabase();
 		return true;
+	}
+	
+	@Bean
+	public IEmailService iEmailService() {
+		return new SmtpEmailService();
 	}
 }
