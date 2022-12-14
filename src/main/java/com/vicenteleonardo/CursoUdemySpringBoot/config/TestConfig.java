@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.vicenteleonardo.CursoUdemySpringBoot.services.DBService;
+import com.vicenteleonardo.CursoUdemySpringBoot.services.IEmailService;
+import com.vicenteleonardo.CursoUdemySpringBoot.services.MockEmailService;
 
 /**
  * Classe criada para o perfil de teste, só é chamada quando está neste perfil.
@@ -30,5 +32,10 @@ public class TestConfig {
 	public boolean instatiateDatabase() throws ParseException {
 		dbDbService.instatiateTestDatabase();
 		return true;
+	}
+	
+	@Bean
+	public IEmailService iEmailService() {
+		return new MockEmailService();
 	}
 }
