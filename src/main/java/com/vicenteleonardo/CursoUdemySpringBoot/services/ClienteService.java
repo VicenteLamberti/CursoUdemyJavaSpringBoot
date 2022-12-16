@@ -16,11 +16,14 @@ import org.springframework.stereotype.Service;
 import com.vicenteleonardo.CursoUdemySpringBoot.domain.Cidade;
 import com.vicenteleonardo.CursoUdemySpringBoot.domain.Cliente;
 import com.vicenteleonardo.CursoUdemySpringBoot.domain.Endereco;
+import com.vicenteleonardo.CursoUdemySpringBoot.domain.enums.Perfil;
 import com.vicenteleonardo.CursoUdemySpringBoot.domain.enums.TipoCliente;
 import com.vicenteleonardo.CursoUdemySpringBoot.dto.ClienteDTO;
 import com.vicenteleonardo.CursoUdemySpringBoot.dto.ClienteNewDTO;
 import com.vicenteleonardo.CursoUdemySpringBoot.repositories.ClienteRepository;
 import com.vicenteleonardo.CursoUdemySpringBoot.repositories.EnderecoRepository;
+import com.vicenteleonardo.CursoUdemySpringBoot.security.UserSS;
+import com.vicenteleonardo.CursoUdemySpringBoot.services.exceptions.AuthorizationException;
 import com.vicenteleonardo.CursoUdemySpringBoot.services.exceptions.DataIntegrityException;
 import com.vicenteleonardo.CursoUdemySpringBoot.services.exceptions.ObjectNotFoundException;
 
@@ -38,6 +41,10 @@ public class ClienteService {
 	private BCryptPasswordEncoder encoder;
 	
 	public Cliente find(Integer id){
+		UserSS user = UserService.authenticated();
+		if(user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
 		Optional<Cliente> cliente =  repo.findById(id);
 		return cliente.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName(),null));
 		
