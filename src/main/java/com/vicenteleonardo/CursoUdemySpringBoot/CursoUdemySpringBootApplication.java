@@ -30,11 +30,14 @@ import com.vicenteleonardo.CursoUdemySpringBoot.repositories.ItemPedidoRepositor
 import com.vicenteleonardo.CursoUdemySpringBoot.repositories.PagamentoRepository;
 import com.vicenteleonardo.CursoUdemySpringBoot.repositories.PedidoRepository;
 import com.vicenteleonardo.CursoUdemySpringBoot.repositories.ProdutoRepository;
+import com.vicenteleonardo.CursoUdemySpringBoot.services.S3Service;
 
 @SpringBootApplication
 public class CursoUdemySpringBootApplication implements CommandLineRunner {
 
 
+	@Autowired
+	private S3Service s3Service;
 	
 	
 	public static void main(String[] args) {
@@ -43,7 +46,7 @@ public class CursoUdemySpringBootApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
+		s3Service.uploadFile("C:\\Users\\vicente.lambert\\Pictures\\cao-europeu.jpg");
 		
 	}
 
